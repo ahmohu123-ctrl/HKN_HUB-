@@ -2,11 +2,10 @@
 local Players = game:GetService("Players")
 local LocalPlayer = Players.LocalPlayer
 
--- Safe Anti-Kick: block attempts without cloning
+-- Safe Anti-Kick: prevent kick without cloning
 LocalPlayer:GetPropertyChangedSignal("Parent"):Connect(function()
     if not LocalPlayer.Parent then
         warn("Kick attempt detected! Prevented safely.")
-        -- هنا السكربت يوقف أي محاولة طرد بدون تعديل على اللاعب
     end
 end)
 
@@ -34,7 +33,7 @@ local CurrentTheme = "Dark"
 local Window = Rayfield:CreateWindow({
     Name = "HKN HUB BETA",
     LoadingTitle = "HKN HUB BETA",
-    LoadingSubtitle = "Welcome, Ahmed!",
+    LoadingSubtitle = "Welcome!",
     ConfigurationSaving = {
         Enabled = true,
         FolderName = "HKN_HUB",
@@ -61,14 +60,14 @@ local function AnimateButton(button)
 end
 
 -- ======== Scripts Tab ========
-local ScriptsTab = Window:CreateTab("🧩 All Scripts", 4483362458)
+local ScriptsTab = Window:CreateTab("All Scripts", 4483362458)
 local scripts = {
-    {Name="🔥 UGLY HUB", URL="https://api.luarmor.net/files/v3/loaders/53325754de16c11fbf8bf78101c1c881.lua"},
-    {Name="🛡️ KURD HUB", URL="https://rawscripts.net/raw/Universal-Script-Kurd-Hub-27356"},
-    {Name="🌶️ CHILLI HUB", URL="https://rawscripts.net/raw/Steal-a-Brainrot-Chilli-hub-51378"},
-    {Name="⚡ KANGER HUB", URL="https://raw.githubusercontent.com/iw929wiwiw/New-Bypassed-/main/SAB"},
-    {Name="🐼 LyezHub", URL="https://pandadevelopment.net/virtual/file/0988845b2372c5ee"},
-    {Name="💻 Uni Hub (PC only)", URL="https://pastebin.com/raw/dcyuEgyK"}
+    {Name="UGLY HUB", URL="https://api.luarmor.net/files/v3/loaders/53325754de16c11fbf8bf78101c1c881.lua"},
+    {Name="KURD HUB", URL="https://rawscripts.net/raw/Universal-Script-Kurd-Hub-27356"},
+    {Name="CHILLI HUB", URL="https://rawscripts.net/raw/Steal-a-Brainrot-Chilli-hub-51378"},
+    {Name="KANGER HUB", URL="https://raw.githubusercontent.com/iw929wiwiw/New-Bypassed-/main/SAB"},
+    {Name="LyezHub", URL="https://pandadevelopment.net/virtual/file/0988845b2372c5ee"},
+    {Name="Uni Hub (PC only)", URL="https://pastebin.com/raw/dcyuEgyK"}
 }
 
 -- Search Box
@@ -98,9 +97,9 @@ for _, s in pairs(scripts) do
 end
 
 -- ======== Support Tab ========
-local SupportTab = Window:CreateTab("🛠️ Support", 4483362458)
+local SupportTab = Window:CreateTab("Support", 4483362458)
 SupportTab:CreateButton({
-    Name = "🌐 Join Support Server",
+    Name = "Join Support Server",
     Callback = function(buttonObj)
         AnimateButton(buttonObj)
         setclipboard("https://discord.gg/42WZzPvD")
@@ -108,7 +107,7 @@ SupportTab:CreateButton({
     end
 })
 SupportTab:CreateButton({
-    Name = "📬 Contact Owner",
+    Name = "Contact Owner",
     Callback = function(buttonObj)
         AnimateButton(buttonObj)
         setclipboard("Ahmed#0001")
@@ -117,7 +116,7 @@ SupportTab:CreateButton({
 })
 
 -- ======== Themes Tab ========
-local ThemeTab = Window:CreateTab("🎨 Themes", 4483362458)
+local ThemeTab = Window:CreateTab("Themes", 4483362458)
 for themeName, color in pairs(Themes) do
     ThemeTab:CreateButton({
         Name = themeName,
@@ -131,7 +130,7 @@ for themeName, color in pairs(Themes) do
 end
 
 -- ======== Tips & Tricks Tab ========
-local TipsTab = Window:CreateTab("💡 Tips & Tricks", 4483362458)
+local TipsTab = Window:CreateTab("Tips & Tricks", 4483362458)
 local tips = {
     "Use UGLY HUB for fastest scripts.",
     "KURD HUB is stable for all maps.",
@@ -143,11 +142,11 @@ for _, tip in pairs(tips) do
 end
 
 -- ======== Credits Tab ========
-local CreditsTab = Window:CreateTab("🎖️ Credits", 4483362458)
+local CreditsTab = Window:CreateTab("Credits", 4483362458)
 CreditsTab:CreateLabel("© 2025 Ahmed | Server: HKN")
 
 -- ======== Update Tab ========
-local UpdateTab = Window:CreateTab("🔄 Update", 4483362458)
+local UpdateTab = Window:CreateTab("Update", 4483362458)
 UpdateTab:CreateButton({
     Name = "Update HKN HUB",
     Callback = function(buttonObj)
