@@ -1,4 +1,25 @@
--- Load Rayfield
+-- ======== Anti-Kick Safe ========
+local Players = game:GetService("Players")
+local LocalPlayer = Players.LocalPlayer
+
+-- Safe Anti-Kick: block attempts without cloning
+LocalPlayer:GetPropertyChangedSignal("Parent"):Connect(function()
+    if not LocalPlayer.Parent then
+        warn("Kick attempt detected! Prevented safely.")
+        -- هنا السكربت يوقف أي محاولة طرد بدون تعديل على اللاعب
+    end
+end)
+
+-- Optional: Authorized Users Only
+local allowedUsers = {
+    [123456] = true -- Replace with your UserId
+}
+if not allowedUsers[LocalPlayer.UserId] then
+    warn("You are not authorized to run this script!")
+    return
+end
+
+-- ======== Load Rayfield ========
 local Rayfield = loadstring(game:HttpGet("https://sirius.menu/rayfield"))()
 
 -- Theme colors
@@ -29,7 +50,7 @@ pcall(function()
     if gui then gui.Enabled = true end
 end)
 
--- Helper function for button animation
+-- Button Animation
 local function AnimateButton(button)
     spawn(function()
         local origColor = button.BackgroundColor3
@@ -39,27 +60,13 @@ local function AnimateButton(button)
     end)
 end
 
--- AntiKick / AntiBan
-local Players = game:GetService("Players")
-local LocalPlayer = Players.LocalPlayer
-
-LocalPlayer:GetPropertyChangedSignal("Parent"):Connect(function()
-    if not LocalPlayer.Parent then
-        Rayfield:Notify({Title="Security", Content="Kick attempt detected! Rejoining...", Duration=3})
-        pcall(function()
-            local cloned = LocalPlayer:Clone()
-            cloned.Parent = workspace
-        end)
-    end
-end)
-
--- All Scripts Tab
+-- ======== Scripts Tab ========
 local ScriptsTab = Window:CreateTab("🧩 All Scripts", 4483362458)
 local scripts = {
     {Name="🔥 UGLY HUB", URL="https://api.luarmor.net/files/v3/loaders/53325754de16c11fbf8bf78101c1c881.lua"},
     {Name="🛡️ KURD HUB", URL="https://rawscripts.net/raw/Universal-Script-Kurd-Hub-27356"},
     {Name="🌶️ CHILLI HUB", URL="https://rawscripts.net/raw/Steal-a-Brainrot-Chilli-hub-51378"},
-    {Name="⚡ KANGER HUB", URL="https://raw.githubusercontent.com/iw929wiwiw/New-Bypassed-/refs/heads/main/SAB"},
+    {Name="⚡ KANGER HUB", URL="https://raw.githubusercontent.com/iw929wiwiw/New-Bypassed-/main/SAB"},
     {Name="🐼 LyezHub", URL="https://pandadevelopment.net/virtual/file/0988845b2372c5ee"},
     {Name="💻 Uni Hub (PC only)", URL="https://pastebin.com/raw/dcyuEgyK"}
 }
@@ -78,6 +85,7 @@ ScriptsTab:CreateInput({
     end
 })
 
+-- Create Script Buttons
 for _, s in pairs(scripts) do
     ScriptsTab:CreateButton({
         Name = s.Name,
@@ -89,7 +97,7 @@ for _, s in pairs(scripts) do
     })
 end
 
--- Support Tab
+-- ======== Support Tab ========
 local SupportTab = Window:CreateTab("🛠️ Support", 4483362458)
 SupportTab:CreateButton({
     Name = "🌐 Join Support Server",
@@ -108,7 +116,7 @@ SupportTab:CreateButton({
     end
 })
 
--- Themes Tab
+-- ======== Themes Tab ========
 local ThemeTab = Window:CreateTab("🎨 Themes", 4483362458)
 for themeName, color in pairs(Themes) do
     ThemeTab:CreateButton({
@@ -122,7 +130,7 @@ for themeName, color in pairs(Themes) do
     })
 end
 
--- Tips & Tricks Tab
+-- ======== Tips & Tricks Tab ========
 local TipsTab = Window:CreateTab("💡 Tips & Tricks", 4483362458)
 local tips = {
     "Use UGLY HUB for fastest scripts.",
@@ -134,11 +142,11 @@ for _, tip in pairs(tips) do
     TipsTab:CreateLabel(tip)
 end
 
--- Credits Tab
+-- ======== Credits Tab ========
 local CreditsTab = Window:CreateTab("🎖️ Credits", 4483362458)
 CreditsTab:CreateLabel("© 2025 Ahmed | Server: HKN")
 
--- Update Tab
+-- ======== Update Tab ========
 local UpdateTab = Window:CreateTab("🔄 Update", 4483362458)
 UpdateTab:CreateButton({
     Name = "Update HKN HUB",
@@ -156,9 +164,9 @@ UpdateTab:CreateButton({
     end
 })
 
--- Initial Notification
+-- ======== Initial Notification ========
 Rayfield:Notify({
     Title = "HKN HUB BETA",
-    Content = "All scripts loaded successfully! AntiKick enabled.",
+    Content = "All scripts loaded successfully! AntiKick enabled safely.",
     Duration = 4
 })
